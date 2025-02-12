@@ -2,33 +2,41 @@ import random
 
 
 def choose():
-    meat_list = []
-    fish_list = []
-    vegetable_list = []
-    soup_list = []
+    meat_dict = {}
+    fish_dict = {}
+    vegetable_dict = {}
+    soup_dict = {}
     meat_number = int(input('输入您今晚想吃的荤菜数目:'))
     fish_number = 0
     vegetable_number = int(input('输入您今晚想吃的素菜数目:'))
     soup_number = int(input('输入您今晚想吃的汤的数目:'))
     with open('meat.txt', 'r', encoding='utf-8') as rf:
+        cnt = 1
         line = rf.readline()
         while line:
-            meat_list.append(rf.readline())
+            meat_dict[cnt] = line
+            cnt += 1
             line = rf.readline()
     with open('fish.txt', 'r', encoding='utf-8') as rf:
+        cnt = 1
         line = rf.readline()
         while line:
-            fish_list.append(rf.readline())
+            fish_dict[cnt] = line
+            cnt += 1
             line = rf.readline()
     with open('vegetable.txt', 'r', encoding='utf-8') as rf:
+        cnt = 1
         line = rf.readline()
         while line:
-            vegetable_list.append(rf.readline())
+            vegetable_dict[cnt] = line
+            cnt += 1
             line = rf.readline()
     with open('soup.txt', 'r', encoding='utf-8') as rf:
+        cnt = 1
         line = rf.readline()
         while line:
-            soup_list.append(rf.readline())
+            soup_dict[cnt] = line
+            cnt += 1
             line = rf.readline()
     print(f'--------------------今日菜单------------------------')
     today_meat = set()
@@ -37,45 +45,52 @@ def choose():
     today_soup = set()
     if meat_number != 0:
         for _ in range(meat_number):
-            choice = random.choice(meat_list)
+            num = random.randint(1, len(meat_dict))
+            choice = meat_dict[num]
             if choice not in today_meat:
                 today_meat.add(choice)
             else:
                 while choice in today_meat:
-                    choice = random.choice(meat_list)
+                    num = random.randint(1, len(meat_dict))
+                    choice = meat_dict[num]
                 today_meat.add(choice)
             print(choice, end='')
-
     if fish_number != 0:
         for _ in range(fish_number):
-            choice = random.choice(fish_list)
+            num = random.randint(1, len(fish_dict))
+            choice = fish_dict[num]
             if choice not in today_fish:
                 today_fish.add(choice)
             else:
                 while choice in today_fish:
-                    choice = random.choice(fish_list)
+                    num = random.randint(1, len(fish_dict))
+                    choice = fish_dict[num]
                 today_fish.add(choice)
             print(choice, end='')
 
     if vegetable_number != 0:
         for _ in range(vegetable_number):
-            choice = random.choice(vegetable_list)
+            num = random.randint(1, len(vegetable_dict))
+            choice = vegetable_dict[num]
             if choice not in today_veg:
                 today_veg.add(choice)
             else:
                 while choice in today_veg:
-                    choice = random.choice(vegetable_list)
+                    num = random.randint(1, len(vegetable_dict))
+                    choice = vegetable_dict[num]
                 today_veg.add(choice)
             print(choice, end='')
 
     if soup_number != 0:
         for _ in range(soup_number):
-            choice = random.choice(soup_list)
+            num = random.randint(1, len(soup_dict))
+            choice = soup_dict[num]
             if choice not in today_soup:
                 today_soup.add(choice)
             else:
                 while choice in today_soup:
-                    choice = random.choice(soup_list)
+                    num = random.randint(1, len(soup_dict))
+                    choice = soup_dict[num]
                 today_soup.add(choice)
             print(choice, end='')
 
